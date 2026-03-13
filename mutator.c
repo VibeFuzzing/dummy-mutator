@@ -126,7 +126,7 @@ size_t afl_custom_fuzz(dummy_mutator_t *data, uint8_t *buf, size_t buf_size,
     char file_path[44];
     // stick with the directory path for now
     snprintf(file_path, sizeof(file_path),
-             "telemetry/%04d-%02d-%02d-%02d:%02d:%02d", t->tm_year,
+             "telemetry/%04d-%02d-%02d-%02d:%02d:%02d", t->tm_year + 1900,
              t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 
     if (mkdir(file_path, 0755) != 0) {
@@ -169,7 +169,7 @@ size_t afl_custom_fuzz(dummy_mutator_t *data, uint8_t *buf, size_t buf_size,
               entry->is_ascii ? "true" : "false");
       fprintf(file, "    \"disabled\": %s,\n",
               entry->disabled ? "true" : "false");
-      
+
       fprintf(file, "    \"bitmap_size\": %d,\n", entry->bitmap_size);
       fprintf(file, "    \"fuzz_level\": %d,\n", entry->fuzz_level);
 
